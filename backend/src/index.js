@@ -23,9 +23,15 @@ app.use(express.json());
 app.use(rateLimiter);
 app.use(
     cors({
-      origin: "https://frontend-tau-black-49.vercel.app/",
+      origin: (origin, callback) => {
+        if (!origin || origin.includes("vercel.app") || origin.includes("localhost")) {
+          callback(null, true);
+        } else {
+          callback(new Error("Not allowed by CORS"));
+        }
+      },
     })
-  );
+);
 app.use((req,res,next)=>{
     console.log(`Req method is ${req.method} & req url is ${req.url}`);
     next()
