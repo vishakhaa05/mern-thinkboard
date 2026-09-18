@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(rateLimiter);
 app.use(
     cors({
-      origin: "http://localhost:5173",
+      origin: "https://frontend-tau-black-49.vercel.app/",
     })
   );
 app.use((req,res,next)=>{
